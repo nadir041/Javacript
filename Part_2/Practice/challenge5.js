@@ -26,7 +26,9 @@ const student = {
 };
 
 console.log("Student Name: ", student.name);
+
 const percentage = student.calculatePercentage();
 console.log("Percentage: ", percentage .toFixed(2) + "%");
+
 const grade = student.calculateGrade();
 console.log("Grade: ", grade);
