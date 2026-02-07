@@ -46,7 +46,6 @@ else{
     console.log("Fail")
 }
 
-
 const percentage3 = (english/total) * 100;
 console.log("English Percentage: " + percentage3 + "%");
 
@@ -63,7 +62,3 @@ else if(percentage3 >= 40){
 else{
     console.log("Fail")
 }
-
-
-
-
