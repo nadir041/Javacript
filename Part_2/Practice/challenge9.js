@@ -8,7 +8,7 @@
 
 
 const myApp = (function(){
-
+    
     const secret = "JS Rocket";
     return {
         reveal: function(){
