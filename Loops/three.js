@@ -22,7 +22,7 @@
 
 
 // Maps
-
+// no dublicate value
 
 const map = new Map()
 map.set('PK', "Pakistan")
