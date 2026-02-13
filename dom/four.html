@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Five</title>
+</head>
+<body style="background-color: #121212; color: aliceblue;">
+    
+</body>
+
+<ul class="language">
+    <li>Js</li>
+</ul>
+
+
+<script>
+    // method 1 to add elements
+    function addLanguage(langName){
+        const li = document.createElement('li')
+        li.innerHTML = ` ${langName}`;
+        document.querySelector('.language').appendChild(li)
+    }
+    addLanguage("Python")
+    addLanguage("Java")
+
+// method 2 to add elements
+    function addOptiLanguage(langName){
+        const li = document.createElement('li');
+        li.appendChild(document.createTextNode(langName))
+        document.querySelector('.language').appendChild(li)
+    }
+    addOptiLanguage("GoLang")
+
+
+    //edit values
+
+    const secondLang = document.querySelector("li:nth-child(2)")
+    // secondLang.innerHTML = "Mojo"
+    
+    const newLi = document.createElement('li')
+    newLi.textContent = "Mojo"
+    secondLang.replaceWith(newLi)
+
+
+
+    const firstLang = document.querySelector("li:first-child")
+    // const firstLi = document.createElement('li')
+    // firstLi.textContent = "Javaa"
+    // firstLang.replaceWith(firstLi)
+    firstLang.outerHTML = '<li> JAvaa </li>'
+
+
+
+    // Remove element
+
+    const lastLang = document.querySelector('li:last-child')
+    lastLang.remove()
+
+</script>
+</html>
