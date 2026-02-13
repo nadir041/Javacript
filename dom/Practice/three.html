@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scenario 3</title>
+</head>
+<body style="background-color: #121212; color: white;">
+    <h1 id="count">0</h1>
+<button id="inc">+</button>
+<button id="dec">-</button>
+
+</body>
+
+<script>
+    const increase = document.getElementById('inc');
+    const decrease = document.getElementById('dec');
+    const count = document.getElementById('count');
+
+    let counter = 0;
+    function updateCounterUI(){
+        count.textContent = counter;
+        if(counter < 0){
+            count.style.color = "red";
+        }
+        else if(counter > 10){
+            count.style.color = "green";
+        }
+        else {
+            count.style.color = "white";
+        }
+    }
+
+    increase.addEventListener('click', () => {
+        counter++;
+        updateCounterUI();
+    });
+
+    decrease.addEventListener('click', () => {
+        counter--;
+        updateCounterUI();
+    });
+
+
+</script>
+</html>

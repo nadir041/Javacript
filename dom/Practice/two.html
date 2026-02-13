@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scenario 2</title>
+</head>
+<body style="background-color: #121212; color: white;">
+    <p id="message">Hello</p>
+<button id="btn">Click Me</button>
+</body>
+
+<script>
+    const button = document.getElementById('btn');
+    const message = document.getElementById('message');
+    button.addEventListener('click', () => {
+        const r =Math.floor(Math.random() * 256);
+        const g = Math.floor(Math.random() * 256);
+        const b = Math.floor(Math.random() * 256);
+        document.body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+        message.textContent = `Current Color: rgb(${r}, ${g}, ${b})`;
+    })
+</script>
+</html>
