@@ -1,0 +1,162 @@
+<style>
+
+    .tl-container {
+        padding: 80px 20px;
+        color: #8c8270;
+        overflow-x: hidden; /* Prevents horizontal scroll during animations */
+    }
+
+    .tl-title {
+        font-family: montserrat;
+        font-size: 48px;
+        color: black;
+        text-align: center;
+        margin-bottom: 60px;
+        font-weight: bold;
+    }
+
+    /* 2. THE TIMELINE LINE */
+    .timeline {
+        position: relative;
+        max-width: 1000px;
+        margin: 0 auto;
+        font-weight: 500;
+    }
+
+    .timeline::after {
+        content: '';
+        position: absolute;
+        width: 1px;
+        background-color: #c5beae;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        margin-left: -0.5px;
+    }
+
+    /* 3. TIMELINE ITEMS */
+    .tl-item {
+        padding: 10px 40px;
+        position: relative;
+        background-color: inherit;
+        width: 50%;
+        box-sizing: border-box;
+        
+        /* Animation Initial State */
+        opacity: 0;
+        transition: all 0.8s ease-out;
+    }
+
+    /* Animation Entry Points */
+    .tl-item.left { left: 0; text-align: right; transform: translateX(-50px); }
+    .tl-item.right { left: 50%; text-align: left; transform: translateX(50px); }
+
+    /* Animation Active State (Triggered by JS) */
+    .tl-item.is-visible {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .tl-item::after {
+        content: '';
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        right: -7px;
+        background-color: #f6f3ed;
+        border: 2px solid #4a5d4e;
+        border-radius: 50%;
+        z-index: 1;
+        top: 20px;
+    }
+
+    .right::after { left: -7px; }
+
+    /* 4. CONTENT STYLING */
+    .tl-week-tag {
+        display: inline-block;
+        background-color: #ede8dc;
+        padding: 4px 14px;
+        border-radius: 20px;
+        font-size: 13px;
+        margin-bottom: 15px;
+    }
+
+    .tl-item h2 {
+        font-family: montserrat;
+        font-size: 32px;
+        color: black0;
+        margin: 0 0 15px 0;
+        font-weight: 400;
+    }
+
+    .tl-item p {
+        font-size: 15px;
+        line-height: 1.6;
+        margin: 0;
+        max-width: 300px;
+        display: inline-block;
+        color: black;
+    }
+
+    /* 5. MOBILE RESPONSIVENESS */
+    @media screen and (max-width: 767px) {
+        .timeline::after { left: 31px; }
+        .tl-item {
+            width: 100%;
+            padding-left: 70px;
+            padding-right: 25px;
+            text-align: left !important;
+            transform: translateX(30px) !important; /* Mobile always slides from right */
+        }
+        .tl-item::after { left: 24px; right: auto; }
+        .right { left: 0%; }
+        .tl-item p { max-width: 100%; }
+    }
+</style>
+
+<div class="tl-container">
+    <h1 class="tl-title">Energetic Healing Timeline</h1>
+
+    <div class="timeline">
+        <div class="tl-item left">
+            <div class="tl-week-tag">Week 1–4</div>
+            <h2>Inflammation Softens</h2>
+            <p>Bowel flow, period flow, emotional release moments increase</p>
+        </div>
+
+        <div class="tl-item right">
+            <div class="tl-week-tag">Week 5–8</div>
+            <h2>Flow Returns</h2>
+            <p>Warmth returns to skin, sinuses clear, immune resilience improves</p>
+        </div>
+
+        <div class="tl-item left">
+            <div class="tl-week-tag">Week 9–12</div>
+            <h2>Inner Space Expands</h2>
+            <p>The body stops holding tension as identity, deep healing begins</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    /**
+     * This script detects when the timeline items enter the screen
+     * and adds the 'is-visible' class to trigger the CSS animation.
+     */
+    const observerOptions = {
+        threshold: 0.2 // Trigger when 20% of the item is visible
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.tl-item').forEach(item => {
+        observer.observe(item);
+    });
+</script>
