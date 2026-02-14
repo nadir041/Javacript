@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic To-Do List</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        input, select, button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        button {
+            cursor: pointer;
+            background-color: #28a745;
+            color: white;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+            width: 300px;
+        }
+
+        li {
+            background-color: #1e1e1e;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        li button {
+            background-color: #dc3545;
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Dynamic To-Do List</h1>
+
+    <input type="text" id="taskInput" placeholder="Enter a task">
+    <select id="priority">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+    </select>
+    <button id="addTask">Add Task</button>
+
+    <ul id="taskList"></ul>
+
+<script>
+    const input = document.getElementById('taskInput');
+    const addbtn = document.getElementById('addTask');
+    const prioritySelect = document.getElementById('priority');
+    const taskList = document.getElementById('taskList');
+
+    let tasks = [];
+
+    // Load tasks from localStorage
+    window.addEventListener('load', () => {
+        const storedTasks = JSON.parse(localStorage.getItem('tasks'));
+        if(storedTasks) tasks = storedTasks;
+        renderTasks();
+    });
+
+    // Save tasks
+    function saveTasks() {
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+
+    // Render tasks
+    function renderTasks() {
+        taskList.innerHTML = "";
+        tasks.forEach((task, index) => {
+            const li = document.createElement('li');
+            li.textContent = task.text;
+
+            // Color based on priority and completion
+            if(task.completed) {
+                li.style.textDecoration = "line-through";
+                li.style.color = "green";
+            } else {
+                if(task.priority === "high") li.style.color = "red";
+                else if(task.priority === "medium") li.style.color = "orange";
+                else li.style.color = "white";
+            }
+
+            // Toggle completed
+            li.addEventListener('click', () => {
+                task.completed = !task.completed;
+                saveTasks();
+                renderTasks();
+            });
+
+            // Delete button
+            const delBtn = document.createElement('button');
+            delBtn.textContent = "Delete";
+            delBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent li click (toggle complete)
+                tasks.splice(index, 1);
+                saveTasks();
+                renderTasks();
+            });
+
+            li.appendChild(delBtn);
+            taskList.appendChild(li);
+        });
+    }
+
+    // Add task
+    addbtn.addEventListener('click', () => {
+        const taskText = input.value.trim();
+        if(taskText === "") return;
+
+        tasks.push({ text: taskText, completed: false, priority: prioritySelect.value });
+        saveTasks();
+        input.value = "";
+        renderTasks();
+    });
+
+    // Enter key support
+    input.addEventListener('keypress', (e) => {
+        if(e.key === "Enter") addbtn.click();
+    });
+</script>
+
+</body>
+</html>
