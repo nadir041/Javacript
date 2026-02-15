@@ -14,7 +14,7 @@
     }
 
     body {
-    background-color: #212121;
+    background-color: #502424;
     color: #ffffff;
     min-height: 100vh;
     display: flex;
@@ -95,36 +95,47 @@ color: #cccccc;
     </a>
 
 
-    <h1>Color Scheme Switcher</h1>
+    <h1 class="text">Color Scheme Switcher</h1>
 
     <span class="button" id="grey"></span>
     <span class="button" id="white"></span>
     <span class="button" id="blue"></span>
     <span class="button" id="yellow"></span>
 
-    <h2>
+    <h2 class="text">
     Try clicking on one of the colors above
-    <span>to change the background color of this page!</span>
+    <span class="text">to change the background color of this page!</span>
     </h2>
 
 </div>
 
 <script>
-    const buttons = document.querySelectorAll(".button");
-    const body = document.body;
+    const buttons = document.querySelectorAll('.button');
+    const body = document.querySelector('body');
+    const text = document.querySelectorAll('.text')
 
-    buttons.forEach(function (button) {
-    button.addEventListener("click", function (e) {
-        body.style.backgroundColor = e.target.id;
+    buttons.forEach(function (button){
+        button.addEventListener('click', function(e){
+            const color = e.target.id;
+            body.style.backgroundColor = color;
+            let textColor = 'white';
 
-        // Optional: adjust text color automatically
-        if (e.target.id === "white" || e.target.id === "yellow") {
-        body.style.color = "#000";
-        } else {
-        body.style.color = "#fff";
-        }
+
+
+            if ( color === "white" || color === "yellow" ) {
+                textColor = 'black'
+            }
+            else if (color === "grey" || color === "blue") {
+            textColor = 'white';
+            }
+            text.forEach(function (t ){
+                t.style.color = textColor;
+            } )
+
+        });
+
     });
-    });
+    
 </script>
 
 </body>
