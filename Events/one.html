@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>html Events</title>
+
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background: linear-gradient(135deg, #141e30, #243b55);
+        color: white;
+        text-align: center;
+        padding: 40px;
+    }
+
+    h2 {
+        margin-bottom: 30px;
+        font-size: 28px;
+        letter-spacing: 1px;
+    }
+    #google {
+        display:inline-block;
+        color: white;
+
+    }
+
+    #images {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    #images li {
+        background: rgba(255, 255, 255, 0.08);
+        padding: 10px;
+        border-radius: 15px;
+        backdrop-filter: blur(8px);
+        transition: 0.3s ease;
+    }
+
+    #images li:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    #images img {
+        width: 200px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: 0.3s ease;
+    }
+
+    #images img:hover {
+        transform: scale(1.05);
+    }
+</style>
+
+</head>
+
+<body>
+
+    <h2>Amazing image</h2>
+
+    <div>
+        <ul id="images">
+
+            <li>
+                <img width="200px" id="photoshop"
+                    src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt="photoshop">
+            </li>
+
+            <li>
+                <img width="200px" id="japan"
+                    src="https://images.pexels.com/photos/3532553/pexels-photo-3532553.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt="">
+            </li>
+
+            <li>
+                <img width="200px" id="river"
+                    src="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt="">
+            </li>
+
+            <li>
+                <img width="200px" demonstrate id="owl"
+                    src="https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt="">
+            </li>
+            <li><a href="https://google.com" id="google">Google</a></li>
+
+        </ul>
+    </div>
+
+</body>
+
+<script>
+ // document.getElementById('owl').onclick = function(){
+//     alert('You clicked the owl image!');
+     // }
+    // document.getElementById('owl').addEventListener('click', function(){
+//     //     alert("you clicked the owl.");    
+//     // })
+
+//     document.getElementById('owl').addEventListener('click', function() {
+
+//     const browserInfo = navigator.userAgent;
+//     const platform = navigator.platform;
+
+//     alert(
+//         "You clicked the owl \n\n" +
+//         "Browser Info: " + browserInfo + "\n\n" +
+//         "Operating System: " + platform 
+//     )});
+
+    
+//     document.getElementById('google').addEventListener('click', function(event) {
+//         event.preventDefault(); // Prevent the default link behavior
+//         event.stopPropagation(); // Stop the event from bubbling up
+//         console.log("You clicked the Google link!");
+// });
+
+
+document.querySelector('#images').addEventListener('click', function(e){
+    // console.log(e.target.parentNode);
+
+    if (e.target.tagName === 'IMG') {
+        console.log(e.target.id);
+        
+        let removeIt = e.target.parentNode;
+        removeIt.remove();
+    }
+    
+})
+
+
+
+</script>
+</html>
+    
